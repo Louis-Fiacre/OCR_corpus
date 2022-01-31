@@ -31,3 +31,13 @@ Le but étant de comparer la précision des OCRs de gallica et de pytesseract ma
 
 Trouver une manière plus clair de retourner les résultats.
 
+# Structure de l'arborescence produite par l'ensemble des programmes
+
+                          - metadonnees.xml (dublin core métadonnées de l'ouvrage depuis Gallica)
+                          - IMG (jpg depuis Gallica)
+Corpus - Author - Ouvrage - XML (OCR Xml Alto depuis Gallica. N'existe pas toujours)
+                          - TXT_Gallica (txt depuis Xml Alto de Gallica)
+                          - TXT_Tesseract (txt depuis IMG Gallica par pytesseract)
+                          - TXT_Ground_True (txt saisi à la main des trois premières images)
+
+
