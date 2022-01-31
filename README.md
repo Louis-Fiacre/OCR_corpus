@@ -1,4 +1,7 @@
 # OCR_corpus
+
+Dans le cadre de mon master d'Humanités numérique, je cherche à obtenir un corpus de texte pamphlétaire français issu de la fin du XIXè-début XXè siècle et lui appliquer des outils de lemmatisation.
+
 Création d'un corpus depuis Gallica, comparaison de l'océrisation de Gallica et de Tesseract.
 Le but de ce repository est de mettre en place méthodiquement une comparaison des OCR produits par Gallica et par Tesseract (par son binding pytesseract). L'objectif est d'obtenir pour un corpus de texte donné les taux d'erreur CER et WER les plus faibles. 
 L'hypothèse la plus probable est que l'OCR de pytesseract avec le prétraitement adéquat des images sera plus efficient.
@@ -16,7 +19,7 @@ Extrait pour chaque XML_ALTO contenu dans le corpus, le contenu texte et le reto
 
 Océrise les images des ouvrages avec pytesseract et retourne le contenu texte dans dossier TXT_TESSERACT au format .txt
 
-### TO DO
+### TO DO
 Affiner le prétraitement des images pour chaque ouvrage et non pas, comme actuellement dans mon code, seulement appliquer un prétraitement général.
 
 ## CER_WER.py
@@ -27,3 +30,4 @@ Le but étant de comparer la précision des OCRs de gallica et de pytesseract ma
 ### TO DO
 
 Trouver une manière plus clair de retourner les résultats.
+
