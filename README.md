@@ -7,13 +7,10 @@ Le but de ce repository est de mettre en place méthodiquement une comparaison d
 L'hypothèse la plus probable est que l'OCR de pytesseract avec le prétraitement adéquat des images sera plus efficient.
 
 
-## API_Gallica.py
+## Corpus_Generator.py
 
-Construit sur la base de pyllica, il permet de créer une arborescence de dossiers et de fichiers depuis un fichier texte listant les identifiants ark d'ouvrages sur gallica. Il télécharge les images et les xml_alto de l'océrisation de gallica si ils existent.
+Construit sur la base de pyllica, il permet de créer une arborescence de dossiers et de fichiers depuis un fichier texte listant les identifiants ark d'ouvrages sur gallica. Il télécharge les images et les xml_alto de l'océrisation de gallica si ils existent. Et si les xml_alto existent, un dossier text est créer et le contenu du xml alto déversé dans des fichiers txt pour chaque page. 
 
-## XML_ALTO->TXT.py
-
-Extrait pour chaque XML_ALTO contenu dans le corpus, le contenu texte et le retourne dans dans un dossier TXT_GALLICA au format .txt
 
 ## JPG->TXT.py
 
