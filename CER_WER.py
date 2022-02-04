@@ -41,10 +41,6 @@ def corpus(cwd):
 		with open(path, 'r') as f:
 			text = f.read()
 		return text
-	
-	groundtrue = 'TXT_GROUNDTRUE'
-	tesseract = 'TXT_TESSERACT'
-	gallica = 'TXT_GALLICA'
 
 	os.chdir(cwd)
 
@@ -62,21 +58,22 @@ def corpus(cwd):
 
 			print("\n->", author+' '+ouvrage)
 
-			path_groundtrue = os.path.join(cwd, author, ouvrage,groundtrue)
+			path_groundtrue_dir = os.path.join(cwd, author, ouvrage, GROUNDTRUE_DIR)
 
-			if os.path.isdir(path_groundtrue):
+			if os.path.isdir(path_groundtrue_dir):
 
-				groundtrue_files = sorted(os.listdir(path_groundtrue))	
+				groundtrue_files = sorted(os.listdir(path_groundtrue_dir))	
 
 				for file in groundtrue_files:
 
-					gt = os.path.join(path_groundtrue, file)
-					tt = os.path.join(cwd,author,ouvrage,tesseract, file)
-					gc = os.path.join(cwd,author,ouvrage, gallica, file)
+					# donne les trois chemins pour plein text gallica, tesseract et groundtrue
+					path_groundtrue_file = os.path.join(path_groundtrue_dir, file)
+					path_tesseract_file = os.path.join(cwd,author,ouvrage,TESSERACT_DIR, file)
+					path_gallica_file = os.path.join(cwd,author,ouvrage, TXT_DIR, file)
 					
 
-					t1 = reader(gt)
-					t2 = reader(tt)
+					t1 = reader(path_groundtrue_file)
+					t2 = reader(path_tesseract_file )
 					
 
 					print('\n',file, ' CER(%) ', ' WER(%) ')
@@ -86,9 +83,9 @@ def corpus(cwd):
 
 					print('tesseract',round(error_rate,3), ' ',round(error_rate1,3))
 
-					if os.path.isfile(gc):
+					if os.path.isfile(path_gallica_file):
 					
-						t3 = reader(gc)
+						t3 = reader(path_gallica_file)
 
 						_ , error_rate2 = levenshtein(t1,t3,'cer')
 						_ , error_rate3 = levenshtein(t1,t3,'wer')
@@ -98,20 +95,10 @@ def corpus(cwd):
 
 if __name__ == '__main__':
 
-	corpus('/home/lf/Bureau/Mémoire/Corpus')
+	CWD = '/home/lf/Bureau/Memoire/Corpus'
 
-	# cwd = "/home/lf/Bureau/Mémoire/Corpus/Léon_Bloy/Je_m_accuse/TXT_GROUNDTRUE/013.txt"
-	# with open(cwd, "r") as f:
-	#	t1 = f.read()
+	GROUNDTRUE_DIR = 'TXT_GROUNDTRUE'
+	TESSERACT_DIR = 'TXT_TESSERACT'
+	TXT_DIR = 'TXT_GALLICA'
 
-	# cwd = "/home/lf/Bureau/Mémoire/Corpus/Léon_Bloy/Je_m_accuse/TXT_TESSERACT/013.txt"
-	# with open(cwd, "r") as f:
-	# 	t2 = f.read()
-
-	# error, error_rate = levenshtein(t1,t2,'cer')
-	# print('CER',error, round(100-error_rate,3),'%')
-
-	# error1, error_rate1 = levenshtein(t1,t2,'wer')
-	# print('WER',error1, round(100-error_rate1,3),'%')
-
-  
+	corpus(CWD)

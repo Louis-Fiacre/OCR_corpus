@@ -42,14 +42,7 @@ def ocrisation(img):
     
     return(result)
 
-
-if __name__ == "__main__":
-
-    cwd = "/home/lf/Bureau/Mémoire/Corpus"
-    ext = '.jpg'
-    
-    img = 'IMG'
-    txt = 'TXT_GALLICA'
+def main_ocr(cwd):
     
     os.chdir(cwd)
     print("Main ->",os.getcwd())
@@ -59,53 +52,65 @@ if __name__ == "__main__":
     for author in authors:
 
         print("->", author)
-
-        ouvrages = os.listdir(author)
+        path_author_dir = os.path.join(cwd, author)
+        ouvrages = os.listdir(path_author_dir)
 
         for ouvrage in ouvrages:
 
             print("->", ouvrage)
+            path_ouvrage_dir = os.path.join(path_author_dir, ouvrage)
+            path_img_dir = os.path.join(path_ouvrage_dir, IMG_DIR)
 
-            img_dir = os.path.join(cwd, author, ouvrage, img)
+            if os.path.isdir(path_img_dir):
 
-            if os.path.isdir(img_dir):
+                path_tesseract_dir = os.path.join(path_ouvrage_dir, TESSERACT_DIR)
 
-                tesseract_dir = os.path.join(cwd, author, ouvrage,txt)
+                if not os.path.isdir(path_tesseract_dir):
 
-                if not os.path.isdir(tesseract_dir):
+                    os.mkdir(path_tesseract_dir)
 
-                    os.mkdir(tesseract_dir)
+                img_files = os.listdir(path_img_dir)
+                img_files = sorted(img_files)
+                
+                print(" -> "+ ouvrage +" \n-> "+IMG_DIR+"/*.jpg vers"+TESSERACT_DIR+"/*.txt"  )
 
-                files = os.listdir(img_dir)
-                print(" -> "+ ouvrage +" \n-> "+img+"*.jpg vers"+txt+"/*.txt"  )
-                files_ordered = sorted(files)
                 page = 0
 
-                for f in files_ordered[0:10]:
+                for img_file in img_files[0:10]:
 
-                    if f.endswith(".jpg"):
+                    if img_file.endswith(".jpg"):
 
                         page += 1
 
-                        img_path = os.path.join(img_dir,f)
-                        ftxt = f.replace(".jpg",".txt")
-                        txt_path = os.path.join(tesseract_dir,ftxt)
+                        path_img_file = os.path.join(path_img_dir, img_file)
+                        txt_file = img_file.replace(".jpg",".txt")
+                        path_tesseract_file = os.path.join(path_tesseract_dir, txt_file)
 
-                        if not os.path.isfile(txt_path):
+                        if not os.path.isfile(path_tesseract_file):
 
 
-                            img = cv2.imread(img_path)
+                            img = cv2.imread(path_img_file)
 
                             text = ocrisation(img)
 
-                            with open(txt_path,'w') as txtfile:
+                            with open(path_tesseract_file,'w') as txtfile:
                                 txtfile.write(text)
 
-                        percent = round((page / len(files))*100)
-                        sys.stdout.write("\r OCR TXT : " + str(percent) + "% " + str(page)+"/"+str(len(files)))
+                        percent = round((page / len(img_files))*100)
+                        sys.stdout.write("\r OCR TXT : " + str(percent) + "% " + str(page)+"/"+str(len(img_files)))
                         sys.stdout.flush()
 
                         
             sys.stdout.write("\r\n")
 
             os.chdir(cwd)            
+
+
+if __name__ == "__main__":
+
+    CWD = "/home/lf/Bureau/Memoire/Corpus"
+    
+    IMG_DIR = 'IMG'
+    TESSERACT_DIR = 'TXT_TESSERACT'
+
+    main_ocr(CWD)

@@ -40,31 +40,31 @@ def make_dir(path_, dir_):
 
         return(new_path)
 
-def make_metadonnees(path_, identifier, name='metadonnees.xml'):
+def make_metadonnees(path_ouvrage, identifier, name='metadonnees.xml'):
 
     """ télécharge depuis gallica le xml dublin core des metadonnees d'un ouvrage nommé
     depuis un identifiant ark 
     dans le dossier path_""" 
 
-    biblio_path = os.path.join(path_, name)
+    metadonnee_path = os.path.join(path_ouvrage, name)
 
-    if not os.path.isfile(biblio_path):
+    if not os.path.isfile(metadonnee_path):
 
         url = 'https://gallica.bnf.fr/services/OAIRecord?ark='+identifier[7:]
-        urllib.request.urlretrieve(url, biblio_path)
+        urllib.request.urlretrieve(url, metadonnee_path)
 
-    return biblio_path
+    return metadonnee_path
 
 
 
-def isocr(path_file):
+def isocr(path_xml_file):
 
     """ cherche dans balise des métadonnées d'un ouvrage gallica si une version océrisée de l'ouvrage existe"""
     
-    if path_file.endswith(".xml"):
+    if path_xml_file.endswith(".xml"):
 
-        file = open(path_file, 'r')
-        doc = file.read()
+        xml_file = open(path_xml_file, 'r')
+        doc = xml_file.read()
         soup = BeautifulSoup(doc, 'lxml')
 
         ocr = soup.find('nqamoyen') # balise responsable de l'ocr
@@ -172,40 +172,42 @@ def make_corpus(cwd, data):
     print("Main ->", cwd)
     data_reader(data)
 
-    corpus_path = make_dir(cwd, main_dir)
+    corpus_path = make_dir(cwd, MAIN_DIR)
 
     for ouvrage in OEUVRES:
 
-        author_path = make_dir(corpus_path, ouvrage.author)
+        path_author_dir = make_dir(corpus_path, ouvrage.author)
+        path_ouvrage_dir = make_dir(path_author_dir, ouvrage.title)
 
-        ouvrage_path = make_dir(author_path, ouvrage.title)
+        # créer dossier 'IMG' et télécharger les images de l'ouvrage depuis gallica
+        path_img_dir = make_dir(path_ouvrage_dir, IMG_DIR)
+        scrapper(ouvrage, path_img_dir, '.jpg')
 
-        meta = make_metadonnees(ouvrage_path, ouvrage.identifier)
-        
+        # télécharger les métadonnées de gallica sur l'ouvrage
+        ocr_flag = make_metadonnees(path_ouvrage_dir, ouvrage.identifier)
 
-        img_path = make_dir(ouvrage_path, img_dir)
-        scrapper(ouvrage, img_path, '.jpg')
+        if isocr(ocr_flag) == True:
 
-        if isocr(meta) == True:
+            path_xml_dir = make_dir(path_ouvrage_dir, XML_DIR)
+            path_txt_dir = make_dir(path_ouvrage_dir, TXT_DIR)
 
-            xml_path = make_dir(ouvrage_path, xml_dir)
-            scrapper(ouvrage, xml_path, '.xml')
+            # télécharger les xml de gallica dans dossier 'XML'
+            scrapper(ouvrage, path_xml_dir, '.xml')
 
-            txt_path = make_dir(ouvrage_path, txt_dir)
-
-            xml_alto_to_txt(xml_path, txt_path)
+            # transformer les xml en plein text dans dossier 'TXT_GALLICA'
+            xml_alto_to_txt(path_xml_dir, path_txt_dir)
 
 
 if __name__ == "__main__":
 
     OEUVRES = list()
 
-    cwd = '/home/lf/Bureau/Mémoire/'
-    data = 'gallica_data.txt'
+    MAIN_DIR = 'Corpus'
+    IMG_DIR = 'IMG'
+    XML_DIR = 'XML'
+    TXT_DIR = 'TXT_GALLICA'
 
-    main_dir = 'Corpus'
-    img_dir = 'IMG'
-    xml_dir = 'XML'
-    txt_dir = 'TXT_GALLICA'
+    CWD = '/home/lf/Bureau/Memoire/'
+    DATA = 'gallica_data.txt'
 
-    make_corpus(cwd, data)
+    make_corpus(CWD, DATA)
