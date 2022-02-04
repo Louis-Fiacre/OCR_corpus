@@ -4,9 +4,10 @@ import os
 import sys
 
 class Ouvrage():
-
+    """ Classe permettant de définir les caractéristiques d'un ouvrage"""
+    
     def __init__(self, author, title, identifier, firstpage, lastpage):
-
+	
     	self.author = author
     	self.title = title
     	self.identifier = identifier
@@ -20,14 +21,16 @@ def data_reader(filename):
     with open(filename, "r") as f:
 
         for line in f:
-
+	    # extrait les informations du fichier
             (author, title, identifier, firstpage, lastpage) = line.split(",")
+            # créer un object ouvrage par ligne
             ouvrage = Ouvrage(author, title, identifier, firstpage, lastpage)
+            # ajout à liste de tous les ouvrages
             OEUVRES.append(ouvrage)
 
 def make_dir(path_, dir_):
 
-        """ créer dossier dir_ dans path_ s'il n'existe pas"""
+        """ créer un dossier dir_ dans path_ s'il n'existe pas """
         
         new_path = os.path.join(path_, dir_)
         
@@ -39,9 +42,9 @@ def make_dir(path_, dir_):
 
 def make_metadonnees(path_, identifier, name='metadonnees.xml'):
 
-    """ créer xml du dublin core des metadonnees nommé name
+    """ télécharge depuis gallica le xml dublin core des metadonnees d'un ouvrage nommé
     depuis un identifiant ark 
-    dans le path_""" 
+    dans le dossier path_""" 
 
     biblio_path = os.path.join(path_, name)
 
@@ -56,7 +59,8 @@ def make_metadonnees(path_, identifier, name='metadonnees.xml'):
 
 def isocr(path_file):
 
-    """ cherche dans balise des métadonnées d'un ouvrage gallica si version océrisée existe"""
+    """ cherche dans balise des métadonnées d'un ouvrage gallica si une version océrisée de l'ouvrage existe"""
+    
     if path_file.endswith(".xml"):
 
         file = open(path_file, 'r')
@@ -70,14 +74,12 @@ def isocr(path_file):
         if ocr >= 50:
 
             return True
-        
-        else: 
-        
-            return False
+
+        return False
 
 def scrapper(ouvrage, path_, ext):
 
-    """ récupère les images d'un ouvrage depuis gallica et les dépose dans le répertoire correspondant"""
+    """ récupère les images ou l'xml d'un ouvrage depuis gallica et les dépose dans le répertoire correspondant"""
 
     listpage = range(ouvrage.firstpage, ouvrage.lastpage + 1)
     len_last = len(str(ouvrage.lastpage))
@@ -94,11 +96,11 @@ def scrapper(ouvrage, path_, ext):
         if not os.path.isfile(path_file):
 
             if ext == '.jpg':
-
+            	# requête pour les jpg
                 url = 'http://gallica.bnf.fr/iiif/ark:' + ouvrage.identifier + '/f' + str(page) + '/full/5000/0/native.jpg'
             
             if ext == '.xml':
-
+		# requête pour les xml
                 url = 'https://gallica.bnf.fr/RequestDigitalElement?O='+ouvrage.identifier[7:]+'&E=ALTO&Deb='+str(page)
 
             try:
@@ -108,7 +110,8 @@ def scrapper(ouvrage, path_, ext):
             except urllib.error.HTTPError as err:
 
                 print('Error -> ({})'.format(err))
-
+                
+        # les lignes suivantes gèrent juste un affichage pour suivre l'evolution des requêtes
         print_path = path_.replace('/home/lf/Bureau/Mémoire/Corpus/','')
         percent = round((page / ouvrage.lastpage)*100)
         sys.stdout.write("\r"+ print_path + " : " + str(percent) + "% " + zero+str(page)+"/"+str(ouvrage.lastpage)+ext)
@@ -117,9 +120,12 @@ def scrapper(ouvrage, path_, ext):
 
 def xml_alto_to_txt(xml_path, txt_path):
 
-    """ f : nom du fichier xml
-        xml_dir : dossier du fichier xml
-        txt_dir : dossier du fichier txt créé"""
+    """ 
+    Transforme les xml téléchargés depuis gallica en plein texte txt
+    
+    f : nom du fichier xml
+    xml_dir : dossier du fichier xml
+    txt_dir : dossier du fichier txt créé"""
 
     files = sorted(os.listdir(xml_path))
 
@@ -161,7 +167,7 @@ def xml_alto_to_txt(xml_path, txt_path):
 
 	
 def make_corpus(cwd, data):
-    """ construit un corpus des textes en format jpg et plein text depuis fichier identifiant gallica(data)"""
+    """ construit un corpus des textes en format jpg, xml alto et plein text depuis un fichier de données avec les identifiant gallica(data)"""
 
     print("Main ->", cwd)
     data_reader(data)

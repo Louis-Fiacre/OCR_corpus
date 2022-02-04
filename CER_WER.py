@@ -73,10 +73,11 @@ def corpus(cwd):
 					gt = os.path.join(path_groundtrue, file)
 					tt = os.path.join(cwd,author,ouvrage,tesseract, file)
 					gc = os.path.join(cwd,author,ouvrage, gallica, file)
+					
 
 					t1 = reader(gt)
 					t2 = reader(tt)
-					t3 = reader(gc)
+					
 
 					print('\n',file, ' CER(%) ', ' WER(%) ')
 
@@ -85,10 +86,14 @@ def corpus(cwd):
 
 					print('tesseract',round(error_rate,3), ' ',round(error_rate1,3))
 
-					_ , error_rate2 = levenshtein(t1,t3,'cer')
-					_ , error_rate3 = levenshtein(t1,t3,'wer')
+					if os.path.isfile(gc):
+					
+						t3 = reader(gc)
 
-					print('gallica  ',round(error_rate2,3),' ',round(error_rate3,3))
+						_ , error_rate2 = levenshtein(t1,t3,'cer')
+						_ , error_rate3 = levenshtein(t1,t3,'wer')
+
+						print('gallica  ',round(error_rate2,3),' ',round(error_rate3,3))
 		
 
 if __name__ == '__main__':
