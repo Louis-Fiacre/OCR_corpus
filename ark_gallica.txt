@@ -4,6 +4,7 @@ Georges_Bernanos,scandale_de_la_verite,/12148/bpt6k34135400,15,92
 Maurice_Barrès,scenes_et_doctrines_du_nationalisme,/12148/bpt6k56013884,1,532
 Maurice_Barrès,lame_francaise_et_la_guerre_1,/12148/bpt6k56573676,1,406
 Maurice_Barrès,lame_francaise_et_la_guerre_2,/12148/bpt6k5586699g,1,389
+Maurice_Barrès,lame_francaise_et_la_guerre_3,/12148/bpt6k1513639h,21,467
 Maurice_Barrès,lame_francaise_et_la_guerre_4,/12148/bpt6k56570356,1,326
 Maurice_Barrès,lame_francaise_et_la_guerre_5,/12148/bpt6k5586983n,1,425
 Maurice_Barrès,lame_francaise_et_la_guerre_6,/12148/bpt6k5652201j,1,347
@@ -11,7 +12,7 @@ Maurice_Barrès,lame_francaise_et_la_guerre_7,/12148/bpt6k5652347w,8,440
 Maurice_Barrès,lame_francaise_et_la_guerre_8,/12148/bpt6k5652328j,5,336
 Maurice_Barrès,lame_francaise_et_la_guerre_9,/12148/bpt6k55870062,6,436
 Maurice_Barrès,lame_francaise_et_la_guerre_10,/12148/bpt6k5652397s,6,390
-Maurice_Barrès,lame_francaise_et_la_guerre_11,/12148/bpt6k5586968z,6,292
+Maurice_Barrès,lame_francaise_et_la_guerre_12,/12148/bpt6k5586968z,6,292
 Maurice_Barrès,les_diverses_familles_spirituelles_de_la_france,/12148/bpt6k55116v,1,322
 Maurice_Barrès,une_visite_a_larme_anglaise,/12148/bpt6k54810g,1,123
 Maurice_Barrès,souvenirs_dun_officier_de_la_grande_armee,/12148/bpt6k650906,2,360
@@ -21,5 +22,7 @@ Léon_Bloy,Entrepreneur_de_démolitions,/12148/bpt6k64291656,13,294
 Léon_Bloy,Exégèse_des_lieux_communs,/12148/bpt6k108119f,9,298
 Léon_Bloy,Christophe_Colomb_devant_les_taureaux,/12148/bpt6k5462774z,13,240
 Léon_Bloy,Je_m_accuse,/12148/bpt6k8630177s,13,185
-Léon_Bloy,Les_funérailles_du_naturalisme,/12148/bpt6k10545401,22,44
+Léon_Bloy,Les_funérailles_du_naturalisme,/12148/bpt6k10545401,23,44
 Léon_Bloy,lettres_à_Pierre_Termier,/12148/bpt6k97679614,17,312
+Léon_Bloy, L_Invendable,/12148/bpt6k108121r,6,320
+Léon_Daudet,Le_stupide_XIXe_siecle,/12148/bpt6k55140q,9,312

@@ -1,0 +1,11 @@
+,Auteur,Ouvrage,WER_Gallica,WER_Tesseract,WER_out,CER_Gallica,CER_Tesseract,CER_out,JAC_Ref,JAC_Gallica,JAC_Tesseract,JAC_out
+0,Léon_Bloy,lettres_à_Pierre_Termier,5.26,13.06,2.82,6.03,24.05,7.39,0.0228,0.0221,0.0213,0.0227
+1,Léon_Bloy,Entrepreneur_de_démolitions,5.99,2.37,2.55,31.93,9.81,11.78,0.0189,0.0183,0.0185,0.0182
+2,Léon_Bloy,Les_funérailles_du_naturalisme,0.0,2.21,1.75,0.0,7.03,6.78,0.0232,0.0,0.0231,0.0228
+3,Léon_Bloy,Le_salut_par_les_juifs,12.2,12.83,2.55,17.47,20.42,9.99,0.0415,0.0373,0.0369,0.0407
+4,Léon_Bloy,Exégèse_des_lieux_communs,4.74,3.49,1.63,5.69,9.96,9.01,0.0235,0.0221,0.0231,0.023
+5,Léon_Bloy,Christophe_Colomb_devant_les_taureaux,7.17,4.54,2.13,11.68,12.08,9.65,0.0331,0.0301,0.032,0.0324
+6,Léon_Bloy,Je_m_accuse,8.44,6.25,3.92,39.52,20.72,17.91,0.0299,0.0283,0.0292,0.0284
+7,Georges_Bernanos,le_chemin_de_la_croix_des_ames,0.0,1.55,1.49,0.0,7.0,6.28,0.0134,0.0,0.0133,0.0133
+8,Georges_Bernanos,la_france_contre_les_robots,0.0,4.24,2.95,0.0,12.21,11.74,0.034,0.0,0.0332,0.0336
+9,Georges_Bernanos,scandale_de_la_verite,0.0,6.74,1.9,0.0,16.55,9.61,0.0247,0.0,0.0238,0.0244

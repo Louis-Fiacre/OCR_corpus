@@ -77,6 +77,3 @@ if __name__ == '__main__':
 	t2 = 'a quoi sert des verres'
 	print(levenshtein(t1,t2))
 	print(jaccard(t1,t2))
-	
-
-
