@@ -1,6 +1,6 @@
 # OCR_corpus
 
-Dans le cadre de mon master d'Humanités numérique, je cherche à obtenir un corpus de texte pamphlétaire français issu de la fin du XIXè-début XXè siècle et lui appliquer divers outils de traitement automatique de la langue.
+Dans le cadre de mon master d'Humanités numériques, je cherche à obtenir un corpus de texte pamphlétaire français issu de la fin du XIXè-début XXè siècle et lui appliquer divers outils de traitement automatique de la langue.
 
 Ces scripts permettent d'extraire des documents depuis Gallica via son API au format xml si un ocr existe, et image. D'océriser les images avec pyTesseract. De mesurér le taux d'erreur de l'ocr de Gallica et de pyTesseract.
 
